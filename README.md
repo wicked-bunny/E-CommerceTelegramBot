@@ -23,5 +23,6 @@ Efficient data management for products, categories, and user orders.
 - Database: SQLite (managed via aiosqlite / sqlite3)
 ## Roadmap (Future Enhancements)
 - [ ] Integration of secure in-app payments (Telegram Payments API API / Stripe / LiqPay).
+- [ ] Switch database to PostgreSQL 
 - [ ] Admin panel for easy product and inventory management.
 - [ ] Order tracking system for customers.
