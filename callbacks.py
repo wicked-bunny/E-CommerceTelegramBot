@@ -9,4 +9,4 @@ class BuyProductCallback(CallbackData, prefix="buy_prod"):
 class MainTabsCallback(CallbackData, prefix="main_tabs"):
     target: str
 class CategoriesCallback(CallbackData, prefix="categories_cb"):
-    target: str
+    target: int

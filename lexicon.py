@@ -61,3 +61,8 @@ class ErrorEN:
     @staticmethod
     def empty_catalog() -> str:
         return "The catalog is currently empty."
+
+    @staticmethod
+    def no_items_available_for_this_category() -> str:
+        return "no items for this category is current available"
+

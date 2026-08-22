@@ -11,7 +11,7 @@ from database.models import BaseModel
 import logging
 import sys
 
-from utils.SetMainMenu import set_start_button
+from utils.SetMainMenu import set_start_command
 
 logging.basicConfig(
     level=logging.INFO,  # Показуватиме всі важливі події та оновлення
@@ -51,7 +51,7 @@ async def main():
     dp = Dispatcher()
 
     #set default "/start" button
-    await set_start_button(bot)
+    await set_start_command(bot)
 
     # register handlers and middlewares
     register_routers(dp)

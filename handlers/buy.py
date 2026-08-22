@@ -1,6 +1,6 @@
 from aiogram import Router,F,types
 
-from handlers.сatalog import BuyProductCallback
+from callbacks import BuyProductCallback
 
 router = Router()
 
@@ -12,4 +12,4 @@ async def process_buy_product(callback: types.CallbackQuery, callback_data: BuyP
     product_id = callback_data.product_id
 
     # TODO: Here, you need to retrieve the item by its ID from the repository and submit the payment details/order form
-    await callback.message.answer(f"Ви обрали товар з ID: {product_id}. Готуємо замовлення...")
+    await callback.message.answer(f"You have selected the item with ID: {product_id}. Processing Your Order...")

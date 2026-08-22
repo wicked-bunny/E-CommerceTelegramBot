@@ -2,6 +2,7 @@ from sqlalchemy import BigInteger
 from sqlalchemy.orm import mapped_column, Mapped
 
 from database.models import BaseModel
+from database.models.roles import UserRole
 
 
 class User(BaseModel):
@@ -11,3 +12,5 @@ class User(BaseModel):
 
     username: Mapped[str | None]
     fullname: Mapped[str]
+
+    role: Mapped[str] = mapped_column(default=UserRole.USER)

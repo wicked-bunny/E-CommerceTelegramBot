@@ -1,10 +1,10 @@
 from typing import TypeVar, Type, Optional, List
 
-from sqlalchemy import select, update
+from sqlalchemy import select, update, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database.models import BaseModel
-from repositories.iRepository import IRepository
+from repositories.i_repository import IRepository
 
 T = TypeVar('T', bound=BaseModel)
 
@@ -27,6 +27,7 @@ class SqlAlchemyRepository(IRepository[T]):
 
         return result.scalar_one_or_none()
 
+
     async def update_by_id(self, obj_id: int, data: dict) -> bool:
         id_column = getattr(self.model, "id")
 
@@ -47,8 +48,11 @@ class SqlAlchemyRepository(IRepository[T]):
         return entity
 
     async def delete(self, obj_id: int) -> bool:
-        obj = await self.get_by_id(obj_id=obj_id)
-        if obj:
-            await self.session.delete(obj)
-            return True
-        return False
+        id_column = getattr(self.model, "id")
+        stmt = (
+            delete(self.model)
+            .where(id_column == obj_id)
+            .execution_options(synchronize_session="fetch")
+        )
+        result = await self.session.execute(stmt)
+        return result.rowcount > 0

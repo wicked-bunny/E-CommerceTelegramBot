@@ -3,7 +3,7 @@ from typing import Any, Callable, Dict, Awaitable
 from aiogram import BaseMiddleware
 from aiogram.types import Message
 
-from repositories.implementations.sql_alchemie_unit_of_work import SqlAlchemyUnitOfWork
+from repositories.implementations.sql_alchemy_unit_of_work import SqlAlchemyUnitOfWork
 
 
 class DatabaseSessionMiddleware(BaseMiddleware):
