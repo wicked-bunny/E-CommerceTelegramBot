@@ -6,7 +6,6 @@ from aiogram import Router, types, F
 from repositories.unit_of_work import IUnitOfWork
 from enum import Enum, auto
 
-
 class Categories(Enum):
     CLOTHING        = auto()      #[1]
     SHOES           = auto()      #[2]
@@ -14,7 +13,6 @@ class Categories(Enum):
     ELECTRONICS     = auto()      #[...]
     BEAUTY          = auto()
     ALL_PRODUCTS    = auto()
-
 
 router = Router()
 
@@ -32,8 +30,6 @@ async def process_category_callback(
     # Convert target to a number
     category_id = callback_data.target
 
-
-
     await send_category_products(callback, callback.message.chat.id, category_id, unit_of_work)
 
 async def send_category_products(
@@ -43,7 +39,6 @@ async def send_category_products(
         unit_of_work: IUnitOfWork
 ):
     if category_id == 6:
-        # If the user selected "All products", send all products
         products = await unit_of_work.items.get_all()
     else:
         products = await unit_of_work.items.get_all_by_category(category_id)
@@ -59,10 +54,10 @@ async def send_category_products(
         text = lexicon.LexiconEN.item_description_text(
             name=item.name,
             price=item.price,
+            quantity=item.quantity_in_stock,
             description=item.description
         )
 
-        #create callback for "Buy" button
         buy_callback = BuyProductCallback(action="buy", product_id=item.id)
 
         await event.bot.send_photo(
@@ -70,6 +65,4 @@ async def send_category_products(
             photo=item.file_id,
             caption=text,
             parse_mode="HTML",
-            # passing callback on
             reply_markup=inline_catalog_kb.generate_catalog_kb(buy_callback))
-

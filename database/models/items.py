@@ -13,4 +13,5 @@ class Items(BaseModel):
     file_unic_id: Mapped[str]
     description: Mapped[str]
     price: Mapped[int] # 1$ = 100
+    quantity_in_stock:Mapped[int]
     category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"))       # item to category
